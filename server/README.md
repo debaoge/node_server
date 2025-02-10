@@ -2,6 +2,8 @@
 
 npm i --save express (下载服务器)
 npm i axios
+npm i mongoose --save
+
 
 ----------- 说明 ------------
 1. npm i --save express (下载服务器)
