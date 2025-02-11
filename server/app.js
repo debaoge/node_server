@@ -20,12 +20,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 /*
 /adminapi - 后台管理用的
 /webapi - 企业官网用的
 */
+app.use('/users', usersRouter);
+
+const UserRouter = require('./routes/admin/UserRouter');
+app.use('/adminapi', UserRouter);
+
+const PORT = 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

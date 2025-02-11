@@ -1,6 +1,8 @@
-var express = require('express');
-var UserRouter = express.Router();
+const express = require('express');
+const UserRouter = express.Router();
+const UserController = require('../../controllers/admin/UserController');
 
-UserRouter.post()
+// Correct route path and function reference
+UserRouter.post("/user/login", UserController.login);
 
-module.exports = router;
+module.exports = UserRouter;
