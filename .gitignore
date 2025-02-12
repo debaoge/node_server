@@ -3,3 +3,4 @@ WiredTiger.wt
 diagnostic.data/metrics.2025-02-12T08-33-25Z-00000
 diagnostic.data/metrics.interim
 journal/WiredTigerLog.0000000001
+/db/
