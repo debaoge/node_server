@@ -8,7 +8,7 @@ const userType = {
     password: String, 
     gender:Number,//0, 1, 2
     introduction:String,
-    avator:String, //可以换icon头像
+    avatar:String, //可以换icon头像
     role:Number //管理员1， 编辑2 
 
 }
