@@ -9,12 +9,21 @@ const UserService = {
     },
     upload: async ({ userId, username, introduction, gender, avatar }) => {
         console.log('[INFO: ] UserService 参数: ', { userId, username, introduction, gender, avatar });
-
+        let result = null;
         // 更新用户信息
-        const result = await UserModel.updateOne(
-            { _id: userId },
-            { username, introduction, gender, avatar }
-        );
+        if(avatar){
+            result = await UserModel.updateOne(
+                { _id: userId },
+                { username, introduction, gender, avatar }
+            );
+            
+        }else{
+            result = await UserModel.updateOne(
+                { _id: userId },
+                { username, introduction, gender }
+            );
+        }
+        
         console.log('[INFO:] 更新结果: ', result);
 
         // 检查更新结果

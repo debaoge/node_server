@@ -54,7 +54,7 @@ const UserController = {
         const { username, introduction, gender } = req.body
 
         const token = req.headers["authorization"].split(" ")[1];
-        const avatar = `/avataruploads/${req.file.filename}`
+        const avatar =req.file? `/avataruploads/${req.file.filename}`:''
         
         const payload = JWT.verify(token);
 
