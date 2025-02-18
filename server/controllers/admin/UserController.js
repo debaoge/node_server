@@ -79,13 +79,14 @@ const UserController = {
     },
 
     add: async (req, res) => {
-        console.log('[INFO:] UserController: req.file: ', req.file);
+        console.log('[INFO:] UserController add user: req.file: ', req.file);
         const { username, password, role, introduction, gender } = req.body
-
         const avatar = req.file ? `/avataruploads/${req.file.filename}` : ''
 
         await UserService.add({
-            username, password, role: Number(role),
+            username, 
+            password, 
+            role: Number(role),
             introduction,
             gender: Number(gender),
             avatar
@@ -97,6 +98,30 @@ const UserController = {
                 gender: Number(gender),
                 avatar
             }
+        })
+    },
+
+    getList: async (req, res) => {
+        const result = await UserService.getList(req.params);
+        res.send({
+            ActionType: "OK",
+            data: result
+        })
+    },
+
+    delList: async (req, res) => {
+        console.log('[INFO] UserController del list', req.params.id);
+        const result = await UserService.delList({_id:req.params.id});
+        res.send({
+            ActionType: "OK",
+        })
+    },
+
+    putList: async (req, res) => {
+        console.log('[INFO] UserController put list', req.body);
+        const result = await UserService.putList(req.body);
+        res.send({
+            ActionType: "OK",
         })
     }
 }
