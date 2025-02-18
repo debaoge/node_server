@@ -8,7 +8,7 @@ const UserService = {
         });
     },
     upload: async ({ userId, username, introduction, gender, avatar }) => {
-        console.log('[INFO: ] UserService 参数: ', { userId, username, introduction, gender, avatar });
+        console.log('[INFO: ] UserService upload 参数: ', { userId, username, introduction, gender, avatar });
         let result = null;
         // 更新用户信息
         if(avatar){
@@ -42,7 +42,55 @@ const UserService = {
 
         // 返回更新后的用户信息
         return result;
-    }
+    },
+
+
+    add: async ({ username, password, role, introduction, gender, avatar }) => {
+        console.log('[INFO: ] UserService add 参数: ', { username, password, role, introduction, gender, avatar });
+        let result = null;
+      
+        // 添加用户信息
+        if (avatar) {
+          result = await UserModel.create({
+            username,
+            password,
+            role,
+            introduction,
+            gender,
+            avatar,
+          });
+        } else {
+          result = await UserModel.create({
+            username,
+            password,
+            role,
+            introduction,
+            gender,
+          });
+        }
+      
+        console.log('[INFO:] 加入结果: ', result);
+      
+        // 检查更新结果
+        if (!result) {
+          console.log('[INFO:] 添加用户失败');
+          throw new Error('添加用户失败');
+        }
+        console.log('[INFO:] 用户信息已成功添加');
+      
+        // 返回包含 ActionType 和 data 的对象
+        return {
+          ActionType: 'OK',
+          data: {
+            username,
+            password,
+            role,
+            introduction,
+            gender,
+            avatar,
+          },
+        };
+      }
 };
 
 module.exports = UserService;

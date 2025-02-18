@@ -11,6 +11,6 @@ UserRouter.get("/user/home", (req, res)=>{
 const multer = require('multer')
 const upload = multer({dest:'public/avataruploads/'})
 
-UserRouter.post("/user/upload",upload.single('file'), UserController.upload)
+UserRouter.post("/user/upload",upload.single('avatar'), UserController.upload)
 
 module.exports = UserRouter;

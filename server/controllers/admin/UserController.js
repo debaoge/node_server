@@ -3,7 +3,7 @@ const JWT = require("../../util/JWT");
 
 const UserService = require("../../services/admin/UserService");
 const multer = require("multer");
-const upload = multer({dest:'public/avataruploads/'})
+const upload = multer({ dest: 'public/avataruploads/' })
 
 const UserController = {
     login: async (req, res) => {
@@ -50,17 +50,17 @@ const UserController = {
     },
 
     upload: async (req, res) => {
-        console.log('[INFO:] UserController: req.file: ', req.file);
-        const { username, introduction, gender } = req.body
+        // console.log("req.file:", req.file);
+        // console.log("req.body:", req.body);
 
+        if (!req.file) {
+            return res.status(400).json({ message: "文件上传失败" });
+        }
+        const { username, introduction, gender } = req.body
         const token = req.headers["authorization"].split(" ")[1];
-        const avatar =req.file? `/avataruploads/${req.file.filename}`:''
-        
+        const avatar = req.file ? `/avataruploads/${req.file.filename}` : ''
         const payload = JWT.verify(token);
 
-        // console.log("[INFO:] 从token中得到数据库 用的 userId ", payload.userId);
-        console.log('[INFO:] UserController: req.file: ', req.file);
-        console.log('[INFO:] avatar 更新地址', avatar);
         await UserService.upload({
             userId: payload.userId,
             username,
@@ -69,14 +69,36 @@ const UserController = {
             avatar
         });
         res.send({
-            ActionType:"OK",
-            data:{
-                username, introduction, 
-                gender:Number(gender),
+            ActionType: "OK",
+            data: {
+                username, introduction,
+                gender: Number(gender),
                 avatar
             }
         })
     },
-};
+
+    add: async (req, res) => {
+        console.log('[INFO:] UserController: req.file: ', req.file);
+        const { username, password, role, introduction, gender } = req.body
+
+        const avatar = req.file ? `/avataruploads/${req.file.filename}` : ''
+
+        await UserService.add({
+            username, password, role: Number(role),
+            introduction,
+            gender: Number(gender),
+            avatar
+        });
+        res.send({
+            ActionType: "OK",
+            data: {
+                username, introduction, role, password,
+                gender: Number(gender),
+                avatar
+            }
+        })
+    }
+}
 
 module.exports = UserController;
