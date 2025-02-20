@@ -11,7 +11,7 @@ NewsRouter.post("/news/add",upload.single('cover'), NewsController.add)
 NewsRouter.get("/news/list", NewsController.getList)
 NewsRouter.get("/news/list/:id", NewsController.getList)
 
-// NewsRouter.put("/news/list/:id", NewsController.putList)
+NewsRouter.put("/news/list/:id", NewsController.putList)
 
 NewsRouter.put("/news/publish", NewsController.publish)
 

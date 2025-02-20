@@ -57,9 +57,9 @@ const NewsService = {
         return NewsModel.deleteOne({ _id })
     },
 
-    //   putList: async (body) => {
-    //     return NewsModel.updateOne({_id: body._id}, body)
-    //   },
+    putList: async (body) => {
+        return NewsModel.updateOne({_id: body._id}, body)
+    },
 
     publish: async ({ _id, isPublish, editTime }) => {
         return NewsModel.updateOne({ _id }, { isPublish, editTime })

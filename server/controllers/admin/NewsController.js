@@ -44,13 +44,13 @@ const NewsController = {
         })
     },
 
-    // putList: async (req, res) => {
-    //     console.log('[INFO] NewsController put list', req.body);
-    //     const result = await NewsService.putList(req.body);
-    //     res.send({
-    //         ActionType: "OK",
-    //     })
-    // },
+    putList: async (req, res) => {
+        console.log('[INFO] NewsController put list', req.body);
+        await NewsService.putList(req.body);
+        res.send({
+            ActionType: "OK",
+        })
+    },
 
     publish: async (req, res) => {
         console.log('[INFO] NewsController publish list', req.body);
