@@ -28,29 +28,40 @@ const NewsController = {
         })
     },
 
-    // getList: async (req, res) => {
-    //     const result = await UserService.getList(req.params);
-    //     res.send({
-    //         ActionType: "OK",
-    //         data: result
-    //     })
-    // },
+    getList: async (req, res) => {
+        const result = await NewsService.getList(req.params);
+        res.send({
+            ActionType: "OK",
+            data: result
+        })
+    },
 
-    // delList: async (req, res) => {
-    //     console.log('[INFO] UserController del list', req.params.id);
-    //     const result = await UserService.delList({_id:req.params.id});
-    //     res.send({
-    //         ActionType: "OK",
-    //     })
-    // },
+    delList: async (req, res) => {
+        console.log('[INFO] NewsController del list', req.params.id);
+        const result = await NewsService.delList({_id:req.params.id});
+        res.send({
+            ActionType: "OK",
+        })
+    },
 
     // putList: async (req, res) => {
-    //     console.log('[INFO] UserController put list', req.body);
-    //     const result = await UserService.putList(req.body);
+    //     console.log('[INFO] NewsController put list', req.body);
+    //     const result = await NewsService.putList(req.body);
     //     res.send({
     //         ActionType: "OK",
     //     })
-    // }
+    // },
+
+    publish: async (req, res) => {
+        console.log('[INFO] NewsController publish list', req.body);
+        await NewsService.publish({
+            ...req.body,
+            editTime: new Date()
+        });
+        res.send({
+            ActionType: "OK",
+        })
+    }
 }
 
 module.exports = NewsController;

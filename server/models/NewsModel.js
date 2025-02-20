@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const NewsType = {
     title: String, 
     content: String, 
-    category:Number,
+    category:Number,//1 
     cover:String, //可以换像
     isPublish:Number,
     editTime:Date 

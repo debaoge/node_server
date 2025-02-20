@@ -8,10 +8,13 @@ const upload = multer({dest:'public/newsuploads/'})
 
 NewsRouter.post("/news/add",upload.single('cover'), NewsController.add)
 
-// NewsRouter.get("/news/list", NewsController.getList)
-// NewsRouter.get("/news/list/:id", NewsController.getList)
+NewsRouter.get("/news/list", NewsController.getList)
+NewsRouter.get("/news/list/:id", NewsController.getList)
 
 // NewsRouter.put("/news/list/:id", NewsController.putList)
-// NewsRouter.delete("/news/list/:id", NewsController.delList)
+
+NewsRouter.put("/news/publish", NewsController.publish)
+
+NewsRouter.delete("/news/list/:id", NewsController.delList)
 
 module.exports = NewsRouter;
