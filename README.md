@@ -20,10 +20,10 @@ brew install mongosh (未成功)
 不需要node 环境
 如果exception: connect failed
 1.
-mongod --dbpath --logpath /tmp/mongod.log --fork --verbose
+sm:node sm$ mongod --dbpath /Users/sm/Documents/git/node/db --logpath /tmp/mongod.log --fork --verbose
 mongo
 退出:
-sudo systemctl stop mongo
+sudo systemctl stop mongo 或者 exit
 
 或者:
 brew services list 检查 数据库 是否 运行
