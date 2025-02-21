@@ -42,7 +42,7 @@ const ProductService = {
     },
 
     getList: async ({ id }) => {
-        return id ? ProductModel.find({ _id: id }, ["title", "content", "describe", "cover","editTime"])
+        return id ? ProductModel.find({ _id: id }, ["title", "content", "describe", "cover"])
             : ProductModel.find()
     },
 
@@ -51,10 +51,8 @@ const ProductService = {
     },
 
     putList: async (body) => {
-        const result = ProductModel.updateOne({ _id: body._id }, { body })
-        console.log('[INFO: ] 产品更新后 数据库: ', result);
-        return result
-    },
+        return ProductModel.updateOne({ _id: body._id }, { body })
+    }
 };
 
 module.exports = ProductService;

@@ -40,8 +40,8 @@ const ProductController = {
     putList: async (req, res) => {
         console.log('[INFO] ProductController put list', req.body);
         await ProductService.putList({
-            ...req.body, 
-            editTime:new Date()
+            ...req.body,
+            editTime: new Date()
         });
         res.send({
             ActionType: "OK",
