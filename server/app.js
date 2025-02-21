@@ -11,6 +11,7 @@ var app = express();
 const JWT = require("./util/JWT");
 const UserRouter = require("./routes/admin/UserRouter");
 const NewsRouter = require("./routes/admin/NewsRouter");
+const ProductRouter = require("./routes/admin/ProductRouter")
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -24,8 +25,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // 使用路由
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/adminapi",NewsRouter);
+app.use("/adminapi", NewsRouter);
 app.use("/adminapi", UserRouter);
+app.use("/adminapi", ProductRouter);
+
 
 // ✅ **全局 Token 认证中间件**
 app.use((req, res, next) => {
