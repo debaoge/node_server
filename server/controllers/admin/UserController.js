@@ -1,4 +1,3 @@
-const { error } = require("console");
 const JWT = require("../../util/JWT");
 
 const UserService = require("../../services/admin/UserService");
@@ -84,8 +83,8 @@ const UserController = {
         const avatar = req.file ? `/avataruploads/${req.file.filename}` : ''
 
         await UserService.add({
-            username, 
-            password, 
+            username,
+            password,
             role: Number(role),
             introduction,
             gender: Number(gender),
@@ -111,7 +110,7 @@ const UserController = {
 
     delList: async (req, res) => {
         console.log('[INFO] UserController del list', req.params.id);
-        const result = await UserService.delList({_id:req.params.id});
+        const result = await UserService.delList({ _id: req.params.id });
         res.send({
             ActionType: "OK",
         })
@@ -123,7 +122,7 @@ const UserController = {
         res.send({
             ActionType: "OK",
         })
-    }
+    },
 }
 
 module.exports = UserController;

@@ -92,16 +92,17 @@ const UserService = {
     };
   },
 
-  getList: async ({id}) => { 
-    return id ? UserModel.find({_id:id},["username","role","introduction","gender", "password"]) 
-              : UserModel.find({},["username","role","introduction","gender","avatar"])},
+  getList: async ({ id }) => {
+    return id ? UserModel.find({ _id: id }, ["username", "role", "introduction", "gender", "password"])
+      : UserModel.find({}, ["username", "role", "introduction", "gender", "avatar"])
+  },
 
-  delList: async ({_id}) => {
-    return UserModel.deleteOne({_id})
+  delList: async ({ _id }) => {
+    return UserModel.deleteOne({ _id })
   },
 
   putList: async (body) => {
-    return UserModel.updateOne({_id: body._id}, body)
+    return UserModel.updateOne({ _id: body._id }, body)
   },
 
 };

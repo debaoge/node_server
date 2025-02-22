@@ -52,7 +52,8 @@ const ProductService = {
 
     putList: async (body) => {
         return ProductModel.updateOne({ _id: body._id }, { body })
-    }
+    },
+
 };
 
 module.exports = ProductService;

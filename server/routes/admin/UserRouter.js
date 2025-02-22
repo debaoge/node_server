@@ -18,5 +18,4 @@ UserRouter.get("/user/list/:id", UserController.getList)
 UserRouter.put("/user/list/:id", UserController.putList)
 UserRouter.delete("/user/list/:id", UserController.delList)
 
-
 module.exports = UserRouter;

@@ -29,10 +29,12 @@ app.use("/adminapi", NewsRouter);
 app.use("/adminapi", UserRouter);
 app.use("/adminapi", ProductRouter);
 
+app.use('/avataruploads', express.static(path.join(__dirname, 'public/avataruploads')));
+app.use('/productuploads', express.static(path.join(__dirname, 'public/productuploads')));
 
 // ✅ **全局 Token 认证中间件**
 app.use((req, res, next) => {
-    if (req.url === "/user/login") {
+    if (req.url === "/user/login" || req.url.startsWith("/avataruploads") || req.url.startsWith("/productuploads")) {
     return next();
   }
 
@@ -82,5 +84,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error");
 });
+
+
 
 module.exports = app;
