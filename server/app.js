@@ -8,10 +8,16 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+
 const JWT = require("./util/JWT");
 const UserRouter = require("./routes/admin/UserRouter");
 const NewsRouter = require("./routes/admin/NewsRouter");
 const ProductRouter = require("./routes/admin/ProductRouter")
+
+const webUserRouter = require("./routes/web/UserRouter");
+const webNewsRouter = require("./routes/web/NewsRouter");
+const webProductRouter = require("./routes/web/ProductRouter")
+
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -23,18 +29,33 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // 使用路由
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+app.use("/webapi", webNewsRouter);
+app.use("/webapi", webUserRouter);
+app.use("/webapi", webProductRouter);
+
+
 app.use("/adminapi", NewsRouter);
 app.use("/adminapi", UserRouter);
 app.use("/adminapi", ProductRouter);
 
 app.use('/avataruploads', express.static(path.join(__dirname, 'public/avataruploads')));
 app.use('/productuploads', express.static(path.join(__dirname, 'public/productuploads')));
+app.use('/newsuploads', express.static(path.join(__dirname, 'public/newsuploads')));
+
+app.use("/", indexRouter);
 
 // ✅ **全局 Token 认证中间件**
 app.use((req, res, next) => {
-    if (req.url === "/user/login" || req.url.startsWith("/avataruploads") || req.url.startsWith("/productuploads")) {
+    
+  // 排除不需要 Token 的路由
+  if (
+    req.url === "/user/login" ||
+    req.url.startsWith("/avataruploads") ||
+    req.url.startsWith("/productuploads") ||
+    req.url.startsWith("/webapi") // 排除 /webapi 路由
+  ) {
     return next();
   }
 
