@@ -54,6 +54,7 @@ app.use((req, res, next) => {
     req.url === "/user/login" ||
     req.url.startsWith("/avataruploads") ||
     req.url.startsWith("/productuploads") ||
+    req.url.startsWith("/newsuploads")||
     req.url.startsWith("/webapi") // 排除 /webapi 路由
   ) {
     return next();

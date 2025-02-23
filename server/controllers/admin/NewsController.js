@@ -10,7 +10,7 @@ const NewsController = {
     add: async (req, res) => {
         // console.log('[INFO:] NewsController add news: req.file: ', req.file);
         const { title, content, category, isPublish } = req.body
-        const cover = req.file ? `/avataruploads/${req.file.filename}` : ''
+        const cover = req.file ? `/newsuploads/${req.file.filename}` : ''
 
         await NewsService.add({
             title, 
